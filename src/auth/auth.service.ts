@@ -12,9 +12,11 @@ export class AuthService {
     private readonly jwtService: JwtService
   ) { }
 
+
   async register({ name, email, password }: RegisterDto) {
 
     const user = await this.userService.findOneByEmail(email);
+
 
     if (user) {
       throw new BadRequestException('el usuario ya exite!!! 👻');
@@ -29,6 +31,7 @@ export class AuthService {
 
 
   async login({ email, password }: LoginDto) {
+
     const user = await this.userService.findByEmailWintPassword(email);
 
     if (!user) {

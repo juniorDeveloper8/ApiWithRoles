@@ -28,8 +28,8 @@ export class AuthController {
     status: 400,
     description: 'Bad Request. Invalid input data.',
   })
-  @ApiBearerAuth()
-  @Auth(Role.ADMIN)
+  // @ApiBearerAuth()
+  // @Auth(Role.ADMIN)
   register(
     @Body() registerDto: RegisterDto
   ) {

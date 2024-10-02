@@ -18,6 +18,7 @@ export class CatsController {
   @Post()
   @ApiOperation({ summary: 'Create a new cat' })
   @ApiBearerAuth()
+  @Auth(Role.ADMIN)
   @ApiResponse({ status: 201, description: 'The cat has been successfully created.', type: Cat })
   @ApiResponse({ status: 400, description: 'Bad Request.' })
   async create(@Body() createCatDto: CreateCatDto): Promise<Cat> {
