@@ -1,7 +1,12 @@
 import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDto, RegisterDto } from './dto';
-import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { Request } from 'express';
 import { Auth, Roles } from './decorators';
 import { ActiveUser, Role, UserActiveInterface } from '../common';
@@ -13,10 +18,7 @@ interface RequestWithUser extends Request {
 @ApiTags('Authentication')
 @Controller('auth')
 export class AuthController {
-
-  constructor(
-    private readonly authService: AuthService,
-  ) { }
+  constructor(private readonly authService: AuthService) {}
 
   @Post('register')
   @ApiOperation({ summary: 'Register a new user' })
@@ -30,9 +32,7 @@ export class AuthController {
   })
   // @ApiBearerAuth()
   // @Auth(Role.ADMIN)
-  register(
-    @Body() registerDto: RegisterDto
-  ) {
+  register(@Body() registerDto: RegisterDto) {
     return this.authService.register(registerDto);
   }
 
@@ -50,12 +50,9 @@ export class AuthController {
     status: 401,
     description: 'Unauthorized. Invalid credentials.',
   })
-  login(
-    @Body() loginDto: LoginDto
-  ) {
+  login(@Body() loginDto: LoginDto) {
     return this.authService.login(loginDto);
   }
-
 
   @Get('profile')
   @ApiBearerAuth()
@@ -67,5 +64,4 @@ export class AuthController {
   profile(@ActiveUser() user: UserActiveInterface) {
     return this.authService.profile(user);
   }
-
 }

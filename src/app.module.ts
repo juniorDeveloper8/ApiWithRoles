@@ -12,9 +12,9 @@ config();
     // conexion a al base de datos
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: process.env.DB_HOST || 'db',
-      port: +process.env.DB_PORT || 3306,
-      username: process.env.DB_USERNAME || 'hack4you',
+      host: process.env.DB_HOST || 'localhost',
+      port: +process.env.DB_PORT || 33306,
+      username: process.env.DB_USERNAME || 'root',
       password: process.env.DB_PASSWORD || '123456',
       database: process.env.DB_NAME || 'cats_db',
       autoLoadEntities: true,
@@ -26,4 +26,4 @@ config();
   controllers: [],
   providers: [],
 })
-export class AppModule { }
+export class AppModule {}

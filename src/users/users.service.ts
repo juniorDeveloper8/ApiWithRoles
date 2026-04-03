@@ -7,11 +7,10 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class UsersService {
-
   constructor(
     @InjectRepository(User)
-    private readonly userRepository: Repository<User>
-  ) { }
+    private readonly userRepository: Repository<User>,
+  ) {}
 
   create(createUserDto: CreateUserDto) {
     return this.userRepository.save(createUserDto);
@@ -22,15 +21,11 @@ export class UsersService {
   }
 
   findByEmailWintPassword(email: string) {
-
     return this.userRepository.findOne({
       where: { email },
       select: ['id', 'name', 'email', 'password', 'role'],
     });
-
   }
-
-
 
   findAll() {
     return this.userRepository.find();
